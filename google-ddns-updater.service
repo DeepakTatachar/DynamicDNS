@@ -1,0 +1,14 @@
+[Unit]
+Description=Google Domains DDNS Auto Updater
+After=user@1000.service
+
+[Service]
+ExecStart=/usr/bin/python3 google-ddns-update.py
+WorkingDirectory=/home/deepak/Documents/DynamicDNS
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=deepak
+
+[Install]
+WantedBy=multi-user.target
