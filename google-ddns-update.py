@@ -6,9 +6,9 @@ from urllib.request import urlopen
 
 logging.basicConfig(filename='ddns.log', level=logging.DEBUG, filemode='a', format='%(asctime)s - %(message)s')
 
-username = ""
-password = ""
-hostname = ""
+usernames = []
+passwords = []
+hostnames = []
 old_ip = ''
 
 while True:
@@ -19,11 +19,12 @@ while True:
 		time.sleep(10)
 	else:
 		if my_ip != old_ip:
-			url = 'https://{}:{}@domains.google.com/nic/update?hostname={}'.format(username, password, hostname)
-			response = requests.post(url)
-			output = response.content.decode('utf-8')
-			if 'good' in output or 'nochg' in output:
-				old_ip = my_ip
-			logging.debug('-- OUTPUT FOR UPDATE: '+ hostname +' --')
-			logging.debug('Response from DDNS update: '+ output)
+			for username, password, hostname in zip(usernames, passwords, hostnames):
+				url = 'https://{}:{}@domains.google.com/nic/update?hostname={}'.format(username, password, hostname)
+				response = requests.post(url)
+				output = response.content.decode('utf-8')
+				if 'good' in output or 'nochg' in output:
+					old_ip = my_ip
+				logging.debug('-- OUTPUT FOR UPDATE: '+ hostname +' --')
+				logging.debug('Response from DDNS update: '+ output)
 		time.sleep(60)
