@@ -28,7 +28,20 @@ How to use?
    ```
    enter your details from google domains
  4. Save changes
- 5. run the following command to install as startup service
+ 5. Open google-ddns-updater.service
+ 6. Use
+    ```
+    which python3
+    ```
+    to determine location of python3 and update it under "ExecStart"
+ 7. Set _WorkingDirectory_ to the location of the cloned repository, for example
+ 
+    ```
+    ExecStart=/usr/bin/python3 google-ddns-update.py
+    WorkingDirectory=/home/deepak/Documents/DynamicDNS
+    ```
+ 
+ 8. run the following command to install as startup service
     ```
     sh install-service
     ```
