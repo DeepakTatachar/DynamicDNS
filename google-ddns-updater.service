@@ -3,8 +3,8 @@ Description=Google Domains DDNS Auto Updater
 After=user@1000.service
 
 [Service]
-ExecStart=/usr/bin/python3 google-ddns-update.py
-WorkingDirectory=/home/deepak/Documents/DynamicDNS
+ExecStart=<your python3 location>python3 google-ddns-update.py
+WorkingDirectory=<your location>
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
